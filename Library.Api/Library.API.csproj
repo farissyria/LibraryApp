@@ -4,7 +4,10 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+<<<<<<< HEAD
     <TypeScriptModuleKind>system</TypeScriptModuleKind>
+=======
+>>>>>>> a719361d77be1a89218d44a30fa2836ab7ceeec5
   </PropertyGroup>
 
   <ItemGroup>

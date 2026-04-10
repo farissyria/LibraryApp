@@ -6,9 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+<<<<<<< HEAD
   <ItemGroup>
 	  <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.0" />
 
   </ItemGroup>
 
+=======
+>>>>>>> a719361d77be1a89218d44a30fa2836ab7ceeec5
 </Project>

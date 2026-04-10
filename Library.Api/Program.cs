@@ -5,7 +5,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers(); // Add support for API controllers
 builder.Services.AddEndpointsApiExplorer(); // Required for Swagger
+<<<<<<< HEAD
 
+=======
+>>>>>>> a719361d77be1a89218d44a30fa2836ab7ceeec5
 // 👇 This replaces builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
 
