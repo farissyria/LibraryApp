@@ -12,54 +12,52 @@ using Library.Application.Mappings;
 using Library.Infrastructure.Data;
 using Library.Infrastructure.Repositories;
 
-    var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
-    // Add services to the container.
-    builder.Services.AddControllers(); // Add support for API controllers
-    builder.Services.AddEndpointsApiExplorer(); // Required for Swagger
+// Add services to the container.
+builder.Services.AddControllers(); // Add support for API controllers
+builder.Services.AddEndpointsApiExplorer(); // Required for Swagger
 
-    // Configure Swagger with JWT support
-    builder.Services.AddSwaggerGen(c =>
+// Configure Swagger with JWT support
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
     {
-        c.SwaggerDoc("v1", new OpenApiInfo
-        {
-            Title = "Library API",
-            Version = "v1",
-            Description = "Library Management System API with JWT Authentication"
-        });
-
-        // Add JWT authentication to Swagger
-        c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-        {
-            Description = "JWT Authorization header using the Bearer scheme. Enter 'Bearer' [space] and then your token",
-            Name = "Authorization",
-            In = ParameterLocation.Header,
-            Type = SecuritySchemeType.ApiKey,
-            Scheme = "Bearer"
-        });
-
-        c.AddSecurityRequirement(new OpenApiSecurityRequirement
-        {
-            {
-                new OpenApiSecurityScheme
-                {
-                    Reference = new OpenApiReference
-                    {
-                        Type = ReferenceType.SecurityScheme,
-                        Id = "Bearer"
-                    }
-                },
-                new string[] {}
-            }
-        });
+        Title = "Library API",
+        Version = "v1",
+        Description = "Library Management System API with JWT Authentication"
     });
+
+    // Add JWT authentication to Swagger
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization header using the Bearer scheme. Enter 'Bearer' [space] and then your token",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
 
 // Database Context
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-       builder.Services.AddDbContext<LibraryDbContext>(
-           options =>options.UseSqlServer(connectionString)
-           );
+builder.Services.AddDbContext<LibraryDbContext>(options =>
+    options.UseSqlServer(connectionString));
 
 // Identity
 builder.Services.AddIdentity<User, IdentityRole>(options =>
@@ -74,8 +72,8 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
     // User settings
     options.User.RequireUniqueEmail = true;
 })
-    .AddEntityFrameworkStores<LibraryDbContext>()
-    .AddDefaultTokenProviders();
+.AddEntityFrameworkStores<LibraryDbContext>()
+.AddDefaultTokenProviders();
 
 // JWT Authentication
 var jwtKey = builder.Configuration["Jwt:Key"] ?? "your-super-secret-key-with-at-least-32-characters-long";
@@ -111,7 +109,6 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
-
 // CORS
 builder.Services.AddCors(options =>
 {

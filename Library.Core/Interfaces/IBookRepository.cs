@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Library.Core.Interfaces
 {
-    public interface IBookRepositories:IRepository<Book>
+    public interface IBookRepository:IRepository<Book>
     {
         // Search books by title or author
         Task<IEnumerable<Book>> SearchAsync(string searchTerm);

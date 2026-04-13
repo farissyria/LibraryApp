@@ -1,0 +1,31 @@
+# Ignore build output directories
+bin/
+obj/
+out/
+publish/
+
+# Ignore Visual Studio files
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Ignore Git files
+.git/
+.gitignore
+.gitattributes
+
+# Ignore Docker files
+Dockerfile
+.dockerignore
+
+# Ignore user secrets
+secrets.json
+appsettings.Development.json
+
+# Ignore logs
+*.log
+*.txt
+
+# Ignore test results
+TestResults/
